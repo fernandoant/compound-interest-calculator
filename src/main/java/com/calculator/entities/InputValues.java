@@ -1,7 +1,8 @@
 package com.calculator.entities;
 
 /*
-    Classe responsável por desserializar a entrada enviada pelo usuário através de uma requisição HTTP
+    Classe responsável por desserializar a entrada enviada pelo usuário
+    através de uma requisição HTTP
 */
 public class InputValues {
 

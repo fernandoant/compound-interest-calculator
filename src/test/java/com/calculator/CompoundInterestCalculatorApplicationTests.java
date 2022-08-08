@@ -3,12 +3,14 @@ package com.calculator;
 import com.calculator.entities.InputValues;
 import com.calculator.entities.MonthResult;
 import com.calculator.services.CompoundInterestCalculator;
+import com.calculator.services.exceptions.InvalidInputException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class CompoundInterestCalculatorApplicationTests {
@@ -64,13 +66,54 @@ class CompoundInterestCalculatorApplicationTests {
 		assertThat(secondTest.get(6).getInterestPercentage()).isEqualTo(0.2653);
 	}
 
+	@Test
+	public void zeroedPrincipalInput_should_throw_exception() {
+
+		String expectedMessage = "Principal must be a positive non-zero value";
+		Exception exception = assertThrows(InvalidInputException.class,
+				() -> calculator.totalResult(new InputValues(0.0, 0.02, 5)));
+
+		String actualMessage = exception.getMessage();
+		assert(actualMessage.equals(expectedMessage));
+	}
 
 	@Test
-	void invalidInputTests() {
-		assertThat(calculator.totalResult(new InputValues(0.0, 0.02, 5))).isNull();
-		assertThat(calculator.totalResult(new InputValues(-100.0, 0.02, 5))).isNull();
-		assertThat(calculator.totalResult(new InputValues(100.0, 0.0, 5))).isNull();
-		assertThat(calculator.totalResult(new InputValues(100.0, -0.02, 5))).isNull();
-		assertThat(calculator.totalResult(new InputValues(100.0, 0.05, -2))).isNull();
+	public void negativePrincipalInput_should_throw_exception() {
+		String expectedMessage = "Principal must be a positive non-zero value";
+		Exception exception = assertThrows(InvalidInputException.class,
+				() -> calculator.totalResult(new InputValues(-100.0, 0.02, 5)));
+
+		String actualMessage = exception.getMessage();
+		assert(actualMessage.equals(expectedMessage));
+	}
+
+	@Test
+	public void zeroedInterestRateInput_should_throw_exception() {
+		String expectedMessage = "Interest Rate must be a positive non-zero value";
+		Exception exception = assertThrows(InvalidInputException.class,
+				() -> calculator.totalResult(new InputValues(100.0, 0.0, 5)));
+
+		String actualMessage = exception.getMessage();
+		assert(actualMessage.equals(expectedMessage));
+	}
+
+	@Test
+	public void negativeInterestRateInput_should_throw_exception() {
+		String expectedMessage = "Interest Rate must be a positive non-zero value";
+		Exception exception = assertThrows(InvalidInputException.class,
+				() -> calculator.totalResult(new InputValues(100.0, -0.5, 5)));
+
+		String actualMessage = exception.getMessage();
+		assert(actualMessage.equals(expectedMessage));
+	}
+
+	@Test
+	public void negativePeriodInput_should_throw_exception() {
+		String expectedMessage = "Period must be a positive value";
+		Exception exception = assertThrows(InvalidInputException.class,
+				() -> calculator.totalResult(new InputValues(100.0, 0.01, -5)));
+
+		String actualMessage = exception.getMessage();
+		assert(actualMessage.equals(expectedMessage));
 	}
 }

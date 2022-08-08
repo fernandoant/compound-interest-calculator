@@ -2,6 +2,7 @@ package com.calculator.services;
 
 import com.calculator.entities.InputValues;
 import com.calculator.entities.MonthResult;
+import com.calculator.services.exceptions.InvalidInputException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import java.util.List;
 /*
     Classe de serviço da aplicação
 */
-
 @Service
 public class CompoundInterestCalculator {
 
@@ -20,23 +20,17 @@ public class CompoundInterestCalculator {
         @return: Lista contendo os resultados mensais do investimento, retorna nulo caso a entrada esteja no formato inválido
     */
     public List<MonthResult> totalResult(Double principal, Double interestRate, Integer period) {
-        try {
-            validateInput(principal, interestRate, period);
-            List<MonthResult> resultOverMonths = new ArrayList<>();
-            Double principalOverMonth = principal;
+        validateInput(principal, interestRate, period);
+        List<MonthResult> resultOverMonths = new ArrayList<>();
+        Double principalOverMonth = principal;
 
-            for (int month = 0; month <= period; month++) {
-                MonthResult result = new MonthResult(month, principalOverMonth, interestRate);
-                resultOverMonths.add(result);
-                principalOverMonth = result.getPrincipal();
-            }
+        for (int month = 0; month <= period; month++) {
+            MonthResult result = new MonthResult(month, principalOverMonth, interestRate);
+            resultOverMonths.add(result);
+            principalOverMonth = result.getPrincipal();
+        }
 
-            return resultOverMonths;
-        }
-        catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
+        return resultOverMonths;
     }
 
     public List<MonthResult> totalResult(InputValues values) {
@@ -49,8 +43,8 @@ public class CompoundInterestCalculator {
         @return: Lança exceção caso algum valor esteja no formato inválido
     */
     private void validateInput(Double principal, Double interestRate, Integer period) {
-        if (principal <= 0.0) throw new IllegalStateException("Principal must be a positive non-zero value");
-        if (interestRate <= 0.0) throw new IllegalStateException("Interest Rate must be a positive non-zero value");
-        if (period < 0) throw new IllegalStateException("Period must be a positive value");
+        if (principal <= 0.0) throw new InvalidInputException("Principal must be a positive non-zero value");
+        if (interestRate <= 0.0) throw new InvalidInputException("Interest Rate must be a positive non-zero value");
+        if (period < 0) throw new InvalidInputException("Period must be a positive value");
     }
 }
