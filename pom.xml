@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.2</version>
+		<version>2.7.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.fernandoant</groupId>
 	<artifactId>compundinterest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Compund Interest Calculator</name>
-	<description>Compund interest Calculator</description>
+	<name>Compound Interest Calculator</name>
+	<description>Compound interest Calculator</description>
 	<properties>
 		<java.version>18</java.version>
 	</properties>
