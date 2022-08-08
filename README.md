@@ -5,7 +5,7 @@ Calculadora de Juros Compostos de uma aplicação de rendimentos mensais
 ## Dependências
 * Java 17
 * Spring Boot 2.7.1
-* Maven 4.0.0
+* Maven 3.6.3
 
 _IDE utilizada: IntelliJ IDEA 2021.3.3_
 
