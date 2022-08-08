@@ -1,6 +1,6 @@
 package com.calculator.resource;
 
-import com.calculator.entities.InterestValues;
+import com.calculator.entities.InputValues;
 import com.calculator.entities.MonthResult;
 import com.calculator.services.CompoundInterestCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class CalculatorResource {
     }
 
     @GetMapping(value = "/")
-    public ResponseEntity<List<MonthResult>> calculateResults(@RequestBody InterestValues values) {
+    public ResponseEntity<List<MonthResult>> calculateResults(@RequestBody InputValues values) {
         List<MonthResult> results = calculator.totalResult(values);
 
         return ResponseEntity.ok().body(results);
