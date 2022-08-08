@@ -15,7 +15,7 @@ _IDE utilizada: IntelliJ IDEA 2021.3.3_
 * __mvn spring-boot:run__ - Coloca em execução a API na porta padrão (8080).
 
 
-###Utilizando a API
+### Utilizando a API
 Os valores de entrada deverão ser enviados através do corpo de uma requisição HTTP, no formato Json seguindo a ordem: Capital a ser investido, Taxa de Juros da aplicação e o Prazo do Investimento.
 
 ### Exemplo de corpo da requisição
