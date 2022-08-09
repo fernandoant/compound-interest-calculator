@@ -12,7 +12,7 @@ _IDE utilizada: IntelliJ IDEA 2021.3.3_
 ### Iniciando a Aplicação
 * __mvn compile__ - Compila o projeto
 * __mvn test__ - Executa os testes
-* __mvn spring-boot:run__ - Coloca em execução a API na porta padrão (8080).
+* __mvn spring-boot:run__ - Coloca em execução a API na porta padrão (http://localhost:8080/).
 
 
 ### Utilizando a API
@@ -20,7 +20,9 @@ Os valores de entrada deverão ser enviados através do corpo de uma requisiçã
 
 ### Exemplo de corpo da requisição
 ```javascript
-"principal" : "1000.0",
-"interestRate" : "0.1",
-"period" : "12"
+{
+    "principal" : "1000.0",
+    "interestRate" : "0.1",
+    "period" : "12"
+}
 ```
